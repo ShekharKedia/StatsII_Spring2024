@@ -53,7 +53,7 @@ library(stargazer)
 # open the data file we just imported using "import dataset...". In the window that 
 # opens, you'll notice we can manually change the type of data for each column...
 
-data <- 
+data <- read_csv("D:/TCD- ASDS/Applied Statistics 2/GitHub/StatsII_Spring2024/tutorials/tutorial01/tutorial1_data.csv")
 
 #### Wrangling the data
 # We should now have a dataset where our variables are at least of the correct type.
