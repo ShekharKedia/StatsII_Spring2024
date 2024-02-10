@@ -27,6 +27,11 @@ graduation <- read.table("http://statmath.wu.ac.at/courses/StatsWithR/Powers.txt
                                         "intact" = "factor"))
 summary(graduation)
 
+install.packages("haven")
+library(haven)
+stata_file <- "D:/TCD- ASDS/test.dta"
+write_dta(graduation, stata_file)
+
 # Drop problematic cases
 graduation <- graduation[-which(graduation$nsibs < 0),]
 
@@ -46,6 +51,7 @@ mod <- glm(hsgrad ~ ., # period functions as omnibus selector (kitchen sink addi
 mod <- glm(hsgrad ~ ., 
            data = graduation, 
            family = binomial(link = "logit")) # same as above (logit is default arg)
+
 
 summary(mod)
 
@@ -74,6 +80,14 @@ ggplot(data = confMod, mapping = aes(x = row.names(confMod), y = coefs)) +
   geom_errorbar(aes(ymin = lower, ymax = upper), colour = "red") + 
   coord_flip() +
   labs(x = "Terms", y = "Coefficients")
+
+summary(mod)$coefficients
+
+test <- cbind(summary(mod), confMod)
+test
+
+
+test$`Pr(>|z|)`[test$`Pr(>|z|)` < 0.0001] <- "****"
 
 # Looking at this plot, which terms are significant at the 0.05 level?
 
@@ -131,7 +145,6 @@ mod3 <- glm(hsgrad ~.,
             data = graduation[,!names(graduation) %in% c("nsibs", "nsibs_f")], 
             family = "binomial")
 summary(mod3)
-summary(mod)
 
 # Extract confidence intervals around the estimates
 confMod3 <- data.frame(cbind(lower = exp(confint(mod3)[,1]), 
