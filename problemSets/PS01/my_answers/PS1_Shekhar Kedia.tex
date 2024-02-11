@@ -62,7 +62,7 @@
 
 \title{Problem Set 1}
 \date{Due: February 11, 2024}
-\author{Applied Stats II}
+\author{Student: Shekhar Kedia (23351315)\\Applied Stats II}
 
 
 \begin{document}
@@ -99,11 +99,74 @@ $$p(D \leq d)= \frac{\sqrt {2\pi}}{d} \sum _{k=1}^{\infty }e^{-(2k-1)^{2}\pi ^{2
 	# generate test statistic
 	D <- max(abs(empiricalCDF - pnorm(data))) \end{lstlisting}
 
-\vspace{3in}
+\vspace*{.2cm}
+\noindent\textbf{Solution:\\}
+Firstly using \texttt{R}, I create 1,000 Cauchy random variables running the following codes:
+\lstinputlisting[language=R, firstline=39, lastline=42]{PS1_Shekhar Kedia.R}
+
+\noindent Next, I create the function to perform Kolmogorov-Smirnov test running the following codes:\\
+\textit{N.B.: The function produces two output, one the test statistics (D) and p-value}
+\lstinputlisting[language=R, firstline=46, lastline=60]{PS1_Shekhar Kedia.R}
+
+\noindent Now, I compare the results of the test using the created function and using in-built \texttt{R} function.\\
+The result of the created K-S test function is:
+\lstinputlisting[language=R, firstline=62, lastline=63]{PS1_Shekhar Kedia.R}
+
+\noindent Output:
+\begin{lstlisting}
+D = 0.1347281
+p-value = 0.003801528\end{lstlisting}
+And, the result of K-S test using the in-built \texttt{R} function is:
+\lstinputlisting[language=R, firstline=65, lastline=66]{PS1_Shekhar Kedia.R}
+
+\noindent Output:
+\begin{lstlisting}
+Asymptotic one-sample Kolmogorov-Smirnov test
+data: empirical
+D = 0.13573, p-value = 2.22e-16
+alternative hypothesis: two-sided\end{lstlisting}
+We can see that the output of the function created manually and the in-built function is approximately similar. The minor differences in the decimal values is because of rounding and can be ignored. 
+\vspace{1cm}
 
 \section*{Question 2}
 \noindent Estimate an OLS regression in \texttt{R} that uses the Newton-Raphson algorithm (specifically \texttt{BFGS}, which is a quasi-Newton method), and show that you get the equivalent results to using \texttt{lm}. Use the code below to create your data.
 \vspace{.5cm}
-\lstinputlisting[language=R, firstline=51,lastline=53]{PS1.R} 
+\lstinputlisting[language=R, firstline=74,lastline=76]{PS1_Shekhar Kedia.R} 
+
+
+\vspace*{.2cm}
+\noindent\textbf{Solution:\\}
+Firstly, I run the above code to create the data. Then, I create a function to calculate the sum of squared residuals using the following \texttt{R} codes:
+\lstinputlisting[language=R, firstline=78, lastline=81]{PS1_Shekhar Kedia.R}
+
+\noindent Then, I estimate the coefficients using the BFGS algorithm and plotting the results on a scatter plot to get an idea of the OLS regression using the following \texttt{R} codes:
+\lstinputlisting[language=R, firstline=83, lastline=91]{PS1_Shekhar Kedia.R}
+\pagebreak
+\noindent Output:
+\begin{lstlisting}
+intercept     slope 
+0.1391778 	2.7267000 
+\end{lstlisting}
+
+\noindent Scatter plot showing relationship between Y and X and the OLS regression line using BFGS algorithm:
+\begin{center}
+	\includegraphics[width=12cm]{plot_Y_X_bfgs.pdf}  
+\end{center}
+
+\noindent Finally, I estimate the coefficients using the in-built lm() function to ensure I get the same results and also, plotting the output to see the similarity between the two models.\\
+Following \texttt{R} codes is used:
+\lstinputlisting[language=R, firstline=93, lastline=101]{PS1_Shekhar Kedia.R}
+\pagebreak
+\noindent Output:
+\begin{lstlisting}
+(Intercept)           x 
+0.1391874   	2.7266985 
+\end{lstlisting}
+
+\noindent Scatter plot showing relationship between Y and X and the OLS regression line using lm() function:
+\begin{center}
+	\includegraphics[width=12cm]{plot_Y_X_lm.pdf}  
+\end{center}
+We can see that both the models (using BFGS algorithm and lm() function in \texttt{R}) produced equivalent results to estimate the OLS regression.
 
 \end{document}
