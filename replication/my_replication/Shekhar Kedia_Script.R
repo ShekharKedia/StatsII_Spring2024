@@ -41,8 +41,8 @@ data <- read_dta("HMS BJPS replication data.dta")
 str(data)
 
 
-## Descriptive statistics ##
 
+## Descriptive statistics ##
 # Oct '12 - Jan '13
 subset_data_w6 <- subset(data, wave == 6 & dep_d < Inf & !is.na(pre_party1))
 

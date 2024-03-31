@@ -84,7 +84,7 @@ The key objectives of the replication is as follows:
 	\item Add value to the research by making contributions
 \end{itemize}
 The researchers created a binary dependent variable to map whether respondent support deportation of unauthorised immigrants or not. The original variable captures responses on a 7-point scale ranging from 1 (‘Return illegal immigrants to their native countries’) to 7 (‘Create a pathway to U.S. citizenship for illegal immigrants’). As we can see, the original 7-point scale variable provides more food for thought and so, for the replication exercise, I will be using a multinomial ordered logit model and use this original variable to measure the effect.\\
-When using a 7-point scale variable, the ordered multinomial model helps us understand how a unit change in independent variable is associated with the change in log odds on average for each one step jump in support of unauthorised immigrants.\\
+When using a 7-point scale variable, the ordered multinomial model will help us understand how a unit change in independent variable is associated with the change in log odds on average for each one step jump in support of unauthorised immigrants.\\
 \\As first step, the dependent variable is ordered and level "1" is set as the reference category using the following \texttt{R} code:
 \lstinputlisting[language=R, firstline=162, lastline=164]{Shekhar Kedia_Script.R}  
 
@@ -95,7 +95,7 @@ A population-based panel of American respondents who were eighteen or older in 2
 the fifteenth wave in October 2020. However, it is important to note that the dependent variable was measured from 2012 onward.\\
 \\The table below shows the key demographics of the respondents. We can see that the respondents in the latest October 2020 survey are quite similar to the respondents in the October 2012 survey in terms of demographics. The survey has 12 per cent Black, 11 per cent Hispanic, and about 71 per cent White people, with 38 per cent reporting a college degree.\\
 \\The \texttt{R} code for producing the descriptive summary for both rounds of survey is:
-\lstinputlisting[language=R, firstline=46, lastline=114]{Shekhar Kedia_Script.R}
+\lstinputlisting[language=R, firstline=45, lastline=114]{Shekhar Kedia_Script.R}
 
 \begin{center}
 	\includegraphics{Descriptive Stats.png}  
@@ -155,8 +155,8 @@ So, we find sufficient evidence to say that unemployed respondents oppose the de
 \end{center}
 \textit{\textbf{Notes:} Outcome variable is a binary indicator that equals 1 if respondents support deporting unauthorized migrants and 0 otherwise. All regressions control for respondents’ level of education, level of income (logged), and employment status. Robust standard errors in parentheses.}\\
 \\Across different model specifications we see that if respondent has lost job recently or experienced a drop in income (either personal or family), it affects opposition to unauthorised immigration.\\
-Respondents who recently lost their job are 7.5 percentage points more supportive of deporting unauthorised immigrants. Again, a major income drop (of at least 25 per cent) is associated with a 5.5 percentage points increase in opposition to unauthorised immigration.\\
-We also see that if the respondent has recently found a job, it is negatively associated with support for deporting authorised immigration. However, the coefficient is not statistically reliable.\\
+\\Respondents who recently lost their job are 7.5 percentage points more supportive of deporting unauthorised immigrants. Again, a major income drop (of at least 25 per cent) is associated with a 5.5 percentage points increase in opposition to unauthorised immigration.\\
+\\We also see that if the respondent has recently found a job, it is negatively associated with support for deporting authorised immigration. However, the coefficient is not statistically reliable.\\
 \pagebreak
 \\Next, I run the multinomial ordered logit model with the 7-point scale dependent variable.
 \lstinputlisting[language=R, firstline=208, lastline=217]{Shekhar Kedia_Script.R}
@@ -182,7 +182,7 @@ state             -0.003784855 0.001160226 -3.2621718  0.0011
 6|7                2.383304486 0.144104814 16.5386875  0.0000
 \end{Verbatim}
 We can see from the results that one unit change in \texttt{income\_shock2} variable that is experiencing a major income drop (of at least 25 per cent) is associated with a decrease of 0.207 log odds on average for a one step change of \texttt{path} variable which captures support for deportation on a 7-point scale ranging from 1 (‘Return illegal immigrants to their native countries’) to 7 (‘Create a pathway to U.S. citizenship for illegal immigrants’).\\
-The coefficient for recent job lost and finding job is not statistically reliable.\\
+\\The coefficient for recent \texttt{LOST\_JOB} and \texttt{FOUND\_JOB} is not statistically reliable.\\
 
 \pagebreak
 
@@ -195,19 +195,20 @@ The coefficient for recent job lost and finding job is not statistically reliabl
 	\includegraphics{Heterogeneity.png} 
 \end{center}
 \textit{\textbf{Notes:} Outcome variable is a binary indicator that equals 1 if the respondent supports deporting unauthorized migrants, and 0 otherwise. The linear probability models in columns 2–7 interact with unemployment shocks with indicator variables denoting the different groups of respondents. All regressions control for the constitutive terms of the interaction with job loss and age, income, employment status (retired, disabled or other) and partisanship. Robust standard errors in parentheses.}\\
-\\We can see from the above table that there is no evidence of heterogeneous effects across respondents differentiated by skill level or union membership. Also, no evidence is found in case of counties with higher percentage of foreign-born or unemployment rate. However, we do find some evidence that white respondents who have recently lost their jobs are 16.76 percentage points more opposed to unauthorised immigration. Furthermore, male respondents are 13.61 percentage points more opposed to unauthorised immigration. 
+\\We can see from the above table that there is no evidence of heterogeneous effects across respondents (who recently lost their jobs) differentiated by skill level or union membership. Also, no evidence is found in case of such respondents belonging to counties with higher percentage of foreign-born or unemployment rate. However, we do find some evidence that white respondents who have recently lost their jobs are 16.76 percentage points more opposed to unauthorised immigration. Furthermore, male respondents who have recently lost their jobs are 13.61 percentage points more opposed to unauthorised immigration. 
 
 \pagebreak
 
 \section*{Conclusion}
-From the replication research, we find that labour market factors like unemployment rate and unemployed respondents and counties with high proportion of foreign-born do not affect opposition towards unauthorised immigrants. However personal economic factors like recent job loss or income shock (of at least 25\%) is associated with negative sentiment towards unauthorised immigrants and support their deportation.\\
-Furthermore, from the heterogeneity model we observe that white respondents and male respondents who have faced recent job loss are more likely to support deportation of unauthorised immigrants.\\
-\\It is interesting to note that the broad trend of results remain the same when we use a 7-point scale dependent variable instead of a binary variable for respondent's support towards deporting unauthorised immigrants.
+From the research, we find that labour market factors like unemployment rate and counties with high proportion of foreign-born do not affect opposition towards unauthorised immigrants. However personal economic factors like recent job loss or income shock (of at least 25\%) is associated with negative sentiment towards unauthorised immigrants and support their deportation.\\
+\\Furthermore, from the heterogeneity model we observe that white respondents and male respondents who have faced recent job loss are more likely to support deportation of unauthorised immigrants.\\
+\\On doing the replication of key results, I was able to confirm similar results as originally reported by the authors.\\
+Moreover, as part of my contribution to the research, when I used the original 7-point scale dependent variable, I was able to find that majority of the trends remained the same (as with the authors work), just that the effects of \texttt{UNEMPLOYED} variable was found to be different (in Model 1).
 
 \vspace*{.2cm}
 
-\section*{Limitation}
-The authors used STATA to run the regression models. However, as part of my academic requirement, I had to use \texttt{R} for analysis. The original codes were therefore, rewritten in \texttt{R} for the replication exercise. I notice that while the broad trends and estimates are unchanged, there is slight change in the estimation of standard errors.\\
-\\The replication gave me a good opportunity to brush up my knowledge on STATA and implement in \texttt{R}.
+\section*{Replication limitations}
+The authors used STATA to run the regression models. However, as part of my academic requirement, I had to use \texttt{R} for analysis. The original codes were therefore, rewritten in \texttt{R} for the replication exercise. I notice that while the broad trends and estimates are unchanged, there is marginal change in the estimation of standard errors.\\
+\\The replication gave me a good opportunity to brush up my knowledge on STATA and implement same analysis in \texttt{R}.
 
 \end{document}
